@@ -14,7 +14,9 @@ class main {
 
         $records = csv::getRecords($filename);
 
-        print_r($records);
+        $record = recordFactory::create();
+
+        print_r($record);
 
 
     }
@@ -38,9 +40,24 @@ class csv {
     }
 }
 
-class record {}
+class record {} //is the object
 
-class recordFactory {}
+
+
+
+class recordFactory { //what actually makes the object/how the object is made
+
+    public static function create(Array $array = null) { //declaring what you are passing in to avoid mismatch error
+
+        $record = new record();
+
+        return $record;
+    }
+
+}
+
+
+
 
 class html {
 
