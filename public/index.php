@@ -13,9 +13,9 @@ class main {
     static public function start($filename) {
 
         $records = csv::getRecords($filename);
+        $table = html::generateTable($records);
 
-
-    }
+        }
 }
 
 class csv {     //reading of the file
@@ -99,11 +99,15 @@ class recordFactory { //what actually makes the object/how the object is made
 
 class html {
 
-   // static public function generateTable($records) {
+   static public function generateTable($records) {
 
-    //    $table = $records;
+       foreach ($records as $record) {
+           $array = $record->returnArray();
+           print_r($array);
+       }
+   }
 
-    //    return $table;
+
 
 }
 
