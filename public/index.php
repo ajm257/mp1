@@ -14,9 +14,7 @@ class main {
 
         $records = csv::getRecords($filename);
 
-        $record = recordFactory::create();
-
-        print_r($record);
+        print_r($records);
 
 
     }
@@ -32,7 +30,7 @@ class csv {
         {
             $record = fgetcsv($file);
 
-            $records[] = $record;
+            $records[] = recordFactory::create(); //reads file to give you array of objects
         }
 
         fclose($file);
