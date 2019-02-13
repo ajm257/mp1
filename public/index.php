@@ -14,23 +14,35 @@ class main {
 
         $records = csv::getRecords($filename);
 
-        print_r($records);
-
 
     }
 }
 
-class csv {
+class csv {     //reading of the file
 
     static public function getRecords($filename) {
 
         $file = fopen($filename,"r");
 
+        $fieldNames = array();
+
+        $count = 0;
+
         while(! feof($file))
         {
             $record = fgetcsv($file);
 
-            $records[] = recordFactory::create(); //reads file to give you array of objects
+            if($count == 0) {
+
+                $fieldNames = $record;  //store fieldnames so we can then use as property headers
+
+            } else {
+
+                $records[] = recordFactory::create($fieldNames, $record); //reads file to give you array of objects
+            }
+
+            $count++;   //to increment the counter to retrieve the rest of the records
+
         }
 
         fclose($file);
@@ -38,16 +50,34 @@ class csv {
     }
 }
 
-class record {} //is the object
+class record { //is the object
+
+    public function __construct(Array $fieldNames = null, $values = null) { //object is instantiated, so this function is performed
+
+
+        print_r($fieldNames);
+        print_r($values);
+
+        $this->createProperty();    //$this is the rep of the object, in this case record. all props stored in $this
+
+    }
+
+    public function createProperty($name = 'first', $value = 'bob') {
+
+        $this->{$name} = $value;    //name is the property first
+
+    }
+}
 
 
 
 
 class recordFactory { //what actually makes the object/how the object is made
 
-    public static function create(Array $array = null) { //declaring what you are passing in to avoid mismatch error
+    public static function create(Array $fieldNames = null, Array $values = null) { //declaring what you are passing in to avoid mismatch error
 
-        $record = new record();
+
+        $record = new record($fieldNames, $values);
 
         return $record;
     }
