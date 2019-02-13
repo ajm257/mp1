@@ -6,40 +6,49 @@
  * Time: 8:22 PM
  */
 
-main::start();
+main::start("example.csv");
 
 class main {
 
-    static public function start() {
-        $records = csv::getRecords();
-        $table = html::generateTable($records);
-        system::printPage($table);
+    static public function start($filename) {
+
+        $records = csv::getRecords($filename);
+
+        print_r($records);
+
+
     }
 }
 
 class csv {
 
-    static public function getRecords() {
-        $records = 'test hjsdfh';
+    static public function getRecords($filename) {
+
+        $file = fopen($filename,"r");
+
+        while(! feof($file))
+        {
+            $record = fgetcsv($file);
+
+            $records[] = $record;
+        }
+
+        fclose($file);
         return $records;
     }
-
 }
+
+class record {}
+
+class recordFactory {}
 
 class html {
 
-    static public function generateTable($records) {
+   // static public function generateTable($records) {
 
-        $table = $records;
+    //    $table = $records;
 
-        return $table;
-    }
-}
+    //    return $table;
 
-class system {
-
-    static public function printPage($page){
-        echo $page;
-    }
 }
 
