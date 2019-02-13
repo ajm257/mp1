@@ -63,10 +63,13 @@ class record { //is the object
         }
 
 
-        print_r($this);
+    }
 
+    public function returnArray() {
 
+        $array = (array) $this;
 
+        return $array;
     }
 
     public function createProperty($name = 'first', $value = 'bob') {
