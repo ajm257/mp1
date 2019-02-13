@@ -54,11 +54,18 @@ class record { //is the object
 
     public function __construct(Array $fieldNames = null, $values = null) { //object is instantiated, so this function is performed
 
-        
-        $record = array_combine($fieldNames, $values);
-        print_r($record);
 
-        $this->createProperty();    //$this is the rep of the object, in this case record. all props stored in $this
+        $record = array_combine($fieldNames, $values);
+
+        foreach ($record as $property => $value) {
+            $this->createProperty($property, $value);    //$this is the rep of the object, in this case record. all props stored in $this
+
+        }
+
+
+        print_r($this);
+
+
 
     }
 
